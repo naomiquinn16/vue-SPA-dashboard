@@ -1,15 +1,15 @@
 <template>
-  <Table></Table>
+  <TableComponent></TableComponent>
 </template>
 
 <script>
-  import Table from '../components/Table'
+import TableComponent from '@/components/Table'
 
   export default {
-    name: 'Dashboard',
+    name: 'dashboard',
 
     components: {
-      Table,
-    },
-  }
+      TableComponent,
+    }
+}
 </script>

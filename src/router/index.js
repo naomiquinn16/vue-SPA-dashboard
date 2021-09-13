@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Dashboard from '../views/Dashboard.vue'
+import store from '@/store.js';
 
 Vue.use(VueRouter)
 
@@ -10,7 +11,15 @@ const routes = [
     name: 'dashboard',
     component: Dashboard,
     meta: {
-      authRequired: true
+      authRequired: false
+    }
+  },
+  {
+    path: '/dashboard',
+    name: 'dashboard',
+    component: () => import('../views/Dashboard.vue'),
+    meta: {
+      authRequired: false
     }
   },
   {
@@ -18,7 +27,7 @@ const routes = [
     name: 'profile',
     component: () => import('../views/Profile.vue'),
     meta: {
-      authRequired: true
+      authRequired: false
     }
   },
   {
@@ -38,5 +47,19 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.authRequired)) {
+      if (!store.state.isAuthenticated) {
+          next({
+              path: '/sign-in'
+          });
+      } else {
+          next();
+      }
+  } else {
+      next();
+  }
+});
 
 export default router
