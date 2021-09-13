@@ -3,20 +3,20 @@ import Vuex from 'vuex';
 import * as firebase from 'firebase/app';
 
 import router from './router';
-import { fetchAllPeople } from './services/api.service';
+import { fetchAllPeople, fetchAllPlanets } from './services/api.service';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
-        people: [],
+        data: [],
         isAuthenticated: false,
         user: null,
         isLoading: false
     },
     mutations: {
-        setPeople(state, payload) {
-            state.people = payload;
+        setData(state, payload) {
+            state.data = payload;
         },
         setUser(state, payload) {
             state.user = payload;
@@ -80,11 +80,25 @@ export default new Vuex.Store({
         },
         loadTable({ commit }) {
             commit('startLoading');
-            fetchAllPeople().then((people) => {
-            commit('setPeople', people);
-            commit('stopLoading');
+            fetchAllPlanets().then((planets) => {
+                fetchAllPeople().then((people) => {
+                    let data = people.map(person => {
+                      let  item = planets.find(item => item.url === person.homeworld);
+                        if (item) {
+                            item = {
+                                planet: item.name,
+                                diameter: item.diameter,
+                                climate: item.climate,
+                                population: item.population
+                            }
+                            return {...person, ...item};
+                        }
+                    }).filter(item => item !== undefined);
+                commit('setData', data);
+                commit('stopLoading');
+                });
             });
-          },
+        }
     },
     getters: {
         isAuthenticated(state) {
@@ -93,6 +107,6 @@ export default new Vuex.Store({
         isLoading(state) {
             return state.isLoading;
         },
-        people: state => state.people
+        data: state => state.data
     }
 });
