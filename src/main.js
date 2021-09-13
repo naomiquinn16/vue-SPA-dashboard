@@ -3,7 +3,20 @@ import App from './App.vue';
 import router from './router';
 import vuetify from './plugins/vuetify';
 import store from './store';
-import '@/firebase/';
+import * as firebase from 'firebase/app'
+import 'firebase/auth';
+
+const firebaseConfig = {
+  apiKey: "",
+  authDomain: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: "",
+  measurementId: ""
+};
+
+firebase.initializeApp(firebaseConfig);
 
 Vue.config.productionTip = false
 

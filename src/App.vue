@@ -1,7 +1,7 @@
 <template>
     <v-app id="app">
     <nav>
-    <v-app-bar color="deep-purple accent-4">
+    <v-app-bar color="primary accent-4">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
         <v-toolbar-title>Space App</v-toolbar-title>
         <v-spacer></v-spacer>
@@ -22,17 +22,17 @@
               </v-btn>
             </template>
 
-            <v-list>
+            <v-list v-if="!isAuthenticated">
               <v-list-item
                 v-for="item in appbarItems"
                 :key="item.title"
                 :to="item.url"
-                @click="() => {}"
               >
                 <v-list-item-title>{{ item.title }}</v-list-item-title>
               </v-list-item>
             </v-list>
           </v-menu>
+          <v-btn v-if="isAuthenticated" outline color="white" @click="logout">Logout</v-btn>
       </v-app-bar>
     <v-navigation-drawer v-model="drawer" temporary app>
       <v-list-item>
@@ -66,10 +66,8 @@
           </v-list>
         </v-navigation-drawer>
         </nav>
-        <v-main transition="slide-x-transition">
-          <v-container>
+        <v-main transition="slide-x-transition" fill-height>
             <router-view></router-view>
-          </v-container>
         </v-main>
 
       <v-footer app>
@@ -79,6 +77,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 export default {
   name: 'App',
 
@@ -96,5 +95,13 @@ export default {
             ]
         };
     },
+    computed: {
+        ...mapGetters(['isAuthenticated'])
+    },
+    methods: {
+      logout() {
+          this.$store.dispatch('userSignOut');
+      }
+    }
 };
 </script>

@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import * as firebase from 'firebase/app';
+import * as firebase from 'firebase/app'
+require('firebase/auth')
 
 import router from './router';
 import { fetchAllPeople, fetchAllPlanets } from './services/api.service';

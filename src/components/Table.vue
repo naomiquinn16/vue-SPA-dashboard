@@ -11,22 +11,45 @@
     <v-data-table
       :headers="headers"
       :items="data"
-      :items-per-page="5"
-      item-key="name"
       :search="search"
+      :items-per-page="6"
       class="elevation-1">
-      <template #item.planet="{ value }">
-        <v-dialog v-model="dialog" max-width="400">
-          <template v-slot:activator="{ on, attrs }">
-            <a color="primary" dark v-bind="attrs" v-on="on">
-              {{value}}
-            </a>
-          </template>
-          <v-card>
-            <v-card-title class="text-h5"> Planet Information</v-card-title>
-            <v-card-text>Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.</v-card-text>
-          </v-card>
+      <template v-slot:top>
+        <v-dialog v-model="dialog" max-width="320px">
+            <v-card class="mx-auto">
+              <v-img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-VrRSheHJXPM1JMwrJ3hWl3eEeJB_kmj64A&usqp=CAU"
+              ></v-img>
+              <v-card-title> Information about {{selectedItem.planet}}</v-card-title>
+              <v-list two-line>
+                <v-list-item>
+                  <v-list-item-content>
+                    <v-list-item-title>{{selectedItem.diameter}}</v-list-item-title>
+                    <v-list-item-subtitle>Diameter</v-list-item-subtitle>
+                  </v-list-item-content>
+                </v-list-item>
+              <v-divider></v-divider>
+              <v-list-item>
+                  <v-list-item-content>
+                    <v-list-item-title>{{selectedItem.climate}}</v-list-item-title>
+                    <v-list-item-subtitle>Climate</v-list-item-subtitle>
+                  </v-list-item-content>
+                </v-list-item>
+              <v-divider></v-divider>
+              <v-list-item>
+                  <v-list-item-content>
+                    <v-list-item-title>{{selectedItem.population}}</v-list-item-title>
+                    <v-list-item-subtitle>Population</v-list-item-subtitle>
+                  </v-list-item-content>
+                </v-list-item>
+            </v-list>
+            </v-card>
         </v-dialog>
+      </template>
+      <template v-slot:item.planet="{ item }">
+        <a @click="openPlanetDialog(item)">
+          {{item.planet}}
+        </a>
       </template>
     </v-data-table>
   </v-card>
@@ -43,11 +66,25 @@ export default {
       Promise.all([this.loadTable()]);
   },
   methods: {
-      ...mapActions(['loadTable',])
+      ...mapActions(['loadTable',]),
+      openPlanetDialog(item) {
+        this.selectedIndex = this.data.indexOf(item);
+        this.selectedItem = Object.assign({}, item);
+
+        this.dialog = true;
+      },
   },
   data () {
       return {
         dialog: false,
+        selectedIndex: -1,
+        selectedItem: {
+        name: '',
+        calories: 0,
+        fat: 0,
+        carbs: 0,
+        protein: 0,
+        },
         search: '',
         headers: [
           {

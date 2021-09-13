@@ -11,7 +11,7 @@ const routes = [
     name: 'dashboard',
     component: Dashboard,
     meta: {
-      authRequired: false
+      authRequired: true
     }
   },
   {
@@ -19,7 +19,7 @@ const routes = [
     name: 'dashboard',
     component: () => import('../views/Dashboard.vue'),
     meta: {
-      authRequired: false
+      authRequired: true
     }
   },
   {
@@ -27,7 +27,7 @@ const routes = [
     name: 'profile',
     component: () => import('../views/Profile.vue'),
     meta: {
-      authRequired: false
+      authRequired: true
     }
   },
   {
