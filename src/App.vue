@@ -1,12 +1,12 @@
 <template>
     <v-app id="app">
     <nav>
-    <v-app-bar color="primary accent-4">
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-        <v-toolbar-title>Space App</v-toolbar-title>
+    <v-app-bar color="#0B0E1F" class="white--text">
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" class="white--text" :disabled="!isAuthenticated"></v-app-bar-nav-icon>
+        <v-toolbar-title class="font-weight-black">Space.io</v-toolbar-title><v-icon color="secondary">mdi-circle-medium</v-icon>
         <v-spacer></v-spacer>
         <v-btn icon>
-          <v-icon>mdi-magnify</v-icon>
+          <v-icon class="white--text">mdi-magnify</v-icon>
         </v-btn>
         <v-menu
             left
@@ -17,6 +17,7 @@
                 icon
                 v-bind="attrs"
                 v-on="on"
+                class="white--text"
               >
                 <v-icon>mdi-dots-vertical</v-icon>
               </v-btn>
@@ -28,17 +29,20 @@
                 :key="item.title"
                 :to="item.url"
               >
+                <v-list-item-icon>
+                  <v-icon>{{ item.icon }}</v-icon>
+                </v-list-item-icon>
                 <v-list-item-title>{{ item.title }}</v-list-item-title>
               </v-list-item>
             </v-list>
           </v-menu>
-          <v-btn v-if="isAuthenticated" outline color="white" @click="logout">Logout</v-btn>
+          <v-btn v-if="isAuthenticated" outlined color="white" @click="logout">Logout</v-btn>
       </v-app-bar>
     <v-navigation-drawer v-model="drawer" temporary app>
       <v-list-item>
         <v-list-item-content>
-          <v-list-item-title class="text-h6">
-                Space App
+          <v-list-item-title color="primary" class="text-h6">
+                Space.io<v-icon color="secondary">mdi-circle-medium</v-icon>
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
@@ -70,9 +74,21 @@
             <router-view></router-view>
         </v-main>
 
-      <v-footer app>
-        <!-- -->
-      </v-footer>
+        <v-footer style="padding:0;"
+          >
+            <v-card
+              flat
+              tile
+              width="100%"
+              class="primary text-center"
+            >
+              <v-card-text class="white--text">
+              <v-icon color="secondary">mdi-circle-medium</v-icon>
+                {{ new Date().getFullYear() }} — <strong>Space.io</strong>
+              <v-icon color="secondary">mdi-circle-medium</v-icon>
+              </v-card-text>
+            </v-card>
+          </v-footer>
   </v-app>
 </template>
 
@@ -86,8 +102,8 @@ export default {
             appTitle: 'Space',
             drawer: true,
             appbarItems: [
-                { title: 'Sign In', url: '/sign-in'},
-                { title: 'Join', url: '/join' }
+                { title: 'Sign In', url: '/sign-in', icon: 'mdi-login'},
+                { title: 'Join', url: '/join', icon: 'mdi-account-plus'}
             ],
             navbarItems: [
                 { title: 'Dashboard', url: '/dashboard', icon: 'mdi-view-dashboard-outline' },

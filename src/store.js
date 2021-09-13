@@ -84,7 +84,7 @@ export default new Vuex.Store({
             fetchAllPlanets().then((planets) => {
                 fetchAllPeople().then((people) => {
                     let data = people.map(person => {
-                      let  item = planets.find(item => item.url === person.homeworld);
+                      let item = planets.find(item => item.url === person.homeworld);
                         if (item) {
                             item = {
                                 planet: item.name,

@@ -2,6 +2,7 @@
   <v-card>
     <v-card-title>
         <v-text-field
+          color="secondary"
           v-model="search"
           label="Search"
           single-line
@@ -12,42 +13,54 @@
       :headers="headers"
       :items="data"
       :search="search"
-      :items-per-page="6"
+      :items-per-page="8"
       class="elevation-1">
       <template v-slot:top>
-        <v-dialog v-model="dialog" max-width="320px">
+        <v-dialog v-model="dialog" max-width="500px">
             <v-card class="mx-auto">
               <v-img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-VrRSheHJXPM1JMwrJ3hWl3eEeJB_kmj64A&usqp=CAU"
+              src="https://comet.nerc.ac.uk/wp-content/uploads/2015/04/cropped-Blue-and-purple-space.jpg"
               ></v-img>
               <v-card-title> Information about {{selectedItem.planet}}</v-card-title>
-              <v-list two-line>
+              <v-list>
                 <v-list-item>
+                    <v-list-item-icon>
+                      <v-icon color="secondary">mdi-circle-medium</v-icon>
+                    </v-list-item-icon>
                   <v-list-item-content>
-                    <v-list-item-title>{{selectedItem.diameter}}</v-list-item-title>
-                    <v-list-item-subtitle>Diameter</v-list-item-subtitle>
+                    <v-list-item-title>The diameter of {{selectedItem.planet}} is {{selectedItem.diameter}}</v-list-item-title>
                   </v-list-item-content>
                 </v-list-item>
               <v-divider></v-divider>
               <v-list-item>
+                  <v-list-item-icon>
+                      <v-icon color="secondary">mdi-circle-medium</v-icon>
+                    </v-list-item-icon>
                   <v-list-item-content>
-                    <v-list-item-title>{{selectedItem.climate}}</v-list-item-title>
-                    <v-list-item-subtitle>Climate</v-list-item-subtitle>
+                    <v-list-item-title>The climate here is {{selectedItem.climate}}</v-list-item-title>
                   </v-list-item-content>
                 </v-list-item>
               <v-divider></v-divider>
               <v-list-item>
+                  <v-list-item-icon>
+                      <v-icon color="secondary">mdi-circle-medium</v-icon>
+                    </v-list-item-icon>
                   <v-list-item-content>
-                    <v-list-item-title>{{selectedItem.population}}</v-list-item-title>
-                    <v-list-item-subtitle>Population</v-list-item-subtitle>
+                    <v-list-item-title>The population of {{selectedItem.planet}} is {{selectedItem.population}}</v-list-item-title>
                   </v-list-item-content>
                 </v-list-item>
             </v-list>
             </v-card>
         </v-dialog>
       </template>
+      <template v-slot:item.created="{ item }">
+        <span>{{ new Date(item.created).toLocaleString() }}</span>
+      </template>
+             <template v-slot:item.edited="{ item }">
+        <span>{{ new Date(item.edited).toLocaleString() }}</span>
+      </template>
       <template v-slot:item.planet="{ item }">
-        <a @click="openPlanetDialog(item)">
+        <a @click="openPlanetDialog(item)" style="color: #FF22B1">
           {{item.planet}}
         </a>
       </template>

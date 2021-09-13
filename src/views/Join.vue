@@ -1,15 +1,15 @@
 <template>
-    <v-container fill-height>
+    <v-container fill-height class="join">
         <v-layout align-center justify-center>
             <v-flex xs12 sm8 md4>
                 <v-card class="elevation-12">
-                    <v-toolbar dark color="primary">
-                        <v-toolbar-title>Join Form</v-toolbar-title>
+                    <v-toolbar color="#895EF7">
+                        <v-toolbar-title color="primary" class="font-weight-bold">Create an Account</v-toolbar-title><v-icon color="secondary">mdi-circle-medium</v-icon>
                     </v-toolbar>
                     <v-card-text>
                         <v-form ref="form" v-model="valid" lazy-validation>
                             <v-text-field
-                                prepend-icon="person"
+                                prepend-icon="mdi-at"
                                 name="email"
                                 label="Email"
                                 type="email"
@@ -20,7 +20,7 @@
                             >
                             </v-text-field>
                             <v-text-field
-                                prepend-icon="lock"
+                                prepend-icon="mdi-lock-outline"
                                 name="password"
                                 label="Password"
                                 type="password"
@@ -35,7 +35,7 @@
                     <v-card-actions>
                         <v-spacer></v-spacer>
                         <v-btn
-                            color="primary"
+                            color="accent"
                             :disabled="!valid"
                             @click="submit"
                             data-cy="joinSubmitBtn"
@@ -81,4 +81,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.join {
+    background-image: url("https://brand.teamwork.com/images/logos/usage/the-teamwork-dot-background-sliced.svg");
+    }
+</style>
