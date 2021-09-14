@@ -1,5 +1,14 @@
 # vue-spa-dashboard
 
+## Tech Stack
+
+- Vue.js
+- Vue router
+- Vuetify - UI framework built on top of Vue.js based on Material Design spec. Components are compliant withh Accessibility standards.
+- Vuex
+- Jest
+- Cypress
+
 ## Project setup
 ```
 npm install
@@ -22,5 +31,11 @@ OR Create a new account and sign in with credentials you provided
 
 ### Lints and fixes files
 ```
-npm run lint
+npm run lint 
 ```
+This runs vue-cli-service lint 
+
+### Tests
+npm run test:unit
+
+npm run cypress run
