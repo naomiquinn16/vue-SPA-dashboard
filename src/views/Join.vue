@@ -4,7 +4,7 @@
             <v-flex xs12 sm8 md4>
                 <v-card class="elevation-12">
                     <v-toolbar color="#895EF7">
-                        <v-toolbar-title color="primary" class="font-weight-bold">Create an Account</v-toolbar-title><v-icon color="secondary">mdi-circle-medium</v-icon>
+                        <v-toolbar-title color="primary" class="font-weight-bold white--text">Create an Account</v-toolbar-title><v-icon color="secondary">mdi-circle-medium</v-icon>
                     </v-toolbar>
                     <v-card-text>
                         <v-form ref="form" v-model="valid" lazy-validation>

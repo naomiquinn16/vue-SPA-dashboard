@@ -93,7 +93,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 export default {
   name: 'App',
 
@@ -116,8 +116,9 @@ export default {
     },
     methods: {
       logout() {
-          this.$store.dispatch('userSignOut');
-      }
+        this.userSignOut();
+      },
+      ...mapActions(['userSignOut'])
     }
 };
 </script>
