@@ -20,9 +20,13 @@ firebase.initializeApp(firebaseConfig);
 
 Vue.config.productionTip = false
 
-new Vue({
+const app = new Vue({
   router,
   vuetify,
   store,
   render: h => h(App)
-}).$mount('#app')
+}).$mount('#app');
+if (window.Cypress) {
+  window.app = app;
+}
+

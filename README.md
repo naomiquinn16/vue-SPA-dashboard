@@ -13,7 +13,7 @@
 ```
 npm install
 ```
-Add firebase credentials provided by me
+Add firebase credentials to the main.js file (API keys not commited on Github)
 ### Compiles and hot-reloads for development
 ```
 npm run serve
