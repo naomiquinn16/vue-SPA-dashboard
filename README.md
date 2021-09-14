@@ -38,4 +38,4 @@ This runs vue-cli-service lint
 ### Tests
 npm run test:unit
 
-npm run cypress run
+npm run test:e2e

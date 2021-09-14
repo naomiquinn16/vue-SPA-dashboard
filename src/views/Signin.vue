@@ -39,7 +39,7 @@
                                 color="accent"
                                 :disabled="!valid"
                                 @click="submit"
-                                data-cy="signinSubmitBtn"
+                                data-cy="signinBtn"
                                 >Login</v-btn
                             >
                         </v-card-actions>
